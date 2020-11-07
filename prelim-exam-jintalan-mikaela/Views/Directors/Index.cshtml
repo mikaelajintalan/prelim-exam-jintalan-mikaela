@@ -1,0 +1,71 @@
+﻿@model IEnumerable<prelim_exam_jintalan_mikaela.Models.Director>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    body {
+        background-image: url('https://scontent.fmnl4-4.fna.fbcdn.net/v/t1.15752-0/p280x280/123739322_1338021103208201_1884640544343258589_n.jpg?_nc_cat=100&ccb=2&_nc_sid=ae9488&_nc_eui2=AeENMXCZIuIXQ6yTVV5BjTYrEY2uDAqZehgRja4MCpl6GBhLRpmnWPB63yTHNBWfO1faL0ZaqtZVxkEV5MYsnx6v&_nc_ohc=rPr_RMUHPnAAX9FHvqk&_nc_oc=AQkIW_2ZabFpCUwkPSAwGd9t-3NclhRTfckFng2aYF2b2D-WGfN1keKJOzcMln28RYM&_nc_ht=scontent.fmnl4-4.fna&tp=6&oh=b4e488dd8eff81f53ae303d834602c23&oe=5FC9EF71');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-color: #fea8f3;
+    }
+    #movies {
+        font-family: Comic Sans MS;
+        color: #000000;
+        border-collapse: collapse;
+        width: 35%;
+    }
+
+        #movies td, #movies th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #movies tr:hover {
+            background-color: #FBAED2;
+        }
+
+        #movies th {
+            padding-top: 12px;
+            color: #000000;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #FF00FF;
+            color: #000000;
+        }
+</style>
+
+    <p text-align: center>
+        <a class='btn btn-sm btn-outline-success' asp-action="Create">Create New</a>
+    </p>
+    <table class="table" id="movies">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <a class="btn btn-small btn-outline-success" asp-action="Edit" asp-route-id="@item.id">Edit</a>
+                            <a class="btn btn-small btn-outline-secondary" asp-action="Details" asp-route-id="@item.id">Details</a>
+                            <a class="btn btn-small btn-danger" asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -1,0 +1,56 @@
+﻿@model DirectorVM
+
+@{
+    ViewData["Title"] = "Details";
+    var disable = Model.Movies.Any() ? "" : "disabled";
+}
+<style>
+    body {
+        background-image: url('https://scontent.fmnl4-4.fna.fbcdn.net/v/t1.15752-0/p280x280/123739322_1338021103208201_1884640544343258589_n.jpg?_nc_cat=100&ccb=2&_nc_sid=ae9488&_nc_eui2=AeENMXCZIuIXQ6yTVV5BjTYrEY2uDAqZehgRja4MCpl6GBhLRpmnWPB63yTHNBWfO1faL0ZaqtZVxkEV5MYsnx6v&_nc_ohc=rPr_RMUHPnAAX9FHvqk&_nc_oc=AQkIW_2ZabFpCUwkPSAwGd9t-3NclhRTfckFng2aYF2b2D-WGfN1keKJOzcMln28RYM&_nc_ht=scontent.fmnl4-4.fna&tp=6&oh=b4e488dd8eff81f53ae303d834602c23&oe=5FC9EF71');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+        background-color: #fea8f3;
+    }
+</style>
+
+    <div class="row">
+        <div class="col-md-9">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-subtitle mb-3 muted"><strong>@Model.Director.Name</strong>'s Movies</h5>
+                    @if (Model.Director.Movies.Any())
+                    {
+                        @(await Html.PartialAsync("_movies.cshtml", Model.Director.Movies));
+                    }
+                    else
+                    {
+                        <p class="text-center p-5">No content</p>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="AddMovie" method="post">
+                        <input type="hidden" asp-for="@Model.DirectorID" />
+                        <label class="control-label">Movie List</label>
+                        <select class="form-control mb-3" asp-for="@Model.MovieID" asp-items="@Model.Movies">
+                        </select>
+                        <div class="btn-group btn-block btn-group-sm text-right" role="group" aria-label="Basic example">
+
+                            <input type="submit" value="Add Movie" class="btn btn-small btn-outline-primary" @disable />
+                            <a class="btn btn-small btn-outline-secondary" asp-action="Index" asp-route-id="@Model.Director.id">Return</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-white">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
